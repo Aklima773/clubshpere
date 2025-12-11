@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "mytheme";
+  default: true; 
+ color-scheme: light; /* color of browser-provided UI */
+
+--color-primary: #487ce0;
+--color-secondary: #f111db;
+--color-neutral: #fccb17;
+--color-base-200: #fcd21958
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
