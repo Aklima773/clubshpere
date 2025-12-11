@@ -1,6 +1,6 @@
 import React from 'react';
-import Container from '../Container/Container';
-import Logo from '../logo/Logo';
+import Container from '../../Components/Container/Container';
+import Logo from '../../Components/logo/Logo';
 
 const Footer = () => {
     return (

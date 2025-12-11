@@ -2,49 +2,92 @@ import React from 'react';
 
 import { useForm } from 'react-hook-form';
 import Container from '../../../Components/Container/Container';
+import useAuth from '../../../CustomHooks/useAuth';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
    
+
+  //login uisng react hook form
 const {register,handleSubmit,formState: {errors}} =useForm();
 
-const handleRegister =(data)=>{
-    console.log(data)
-}
 
+// authprovider call 
+const { signInUser } = useAuth();
+
+// location state 
+    const location = useLocation();
+
+//use navigate call
+    const navigate = useNavigate();
+
+    //login function
+
+    const handleLogin = (data) => {
+      console.log('form data', data);
+      signInUser(data.email, data.password)
+          .then(result => {
+              console.log(result.user)
+              navigate(location?.state || '/')
+          })
+          .catch(error => {
+              console.log(error)
+          })
+  }
    
     return (
         <>
 <div className='bg-base-200'>
 
 
-        <Container className=''>
+       
        
     <div className="hero  min-h-screen">
-  <div className="flex flex-col">
-    <div className="text-center my-5">
-      <h1 className="text-5xl font-bold text-primary">Login now!</h1>
-    
-    </div>
-    <div className="card w-full bg-base-100  max-w-2xl shrink-0 shadow-2xl">
-      <div className="card-body">
-        <form  onSubmit={handleSubmit(handleRegister)}>
-        <fieldset className="fieldset">
-          <label className="label">Email</label>
-          <input type="email" className="input" {...register('email')} placeholder="Email" />
-          {errors.email && <p>Email is required.</p>}
-          <label className="label">Password</label>
-          <input type="password" className="input" placeholder="Password" />
-          <div><a className="link link-hover">Forgot password?</a></div>
-          <button className="btn btn-primary mt-4">Login</button>
 
-          Are You New! please <span className='text-sm text-secondary'>Register!</span>
-        </fieldset>
-        </form>
-      </div>
-    </div>
+    <div className="card bg-base-100 w-sm lg:w-full mx-auto max-w-xl shrink-0 shadow-2xl mt-10">
+
+    <Container className='my-4'>
+  <div className="flex flex-col">
+
+    
+    <div className='flex justify-center items-center my-4'>
+     
+     <h3 className="text-2xl text-center ">Welcome back </h3>
+       <div className='ml-2'><span className='text-center text-2xl text-[#f111db]'>Club<spn className='text-[#487ce0]'>Sphere !</spn></span></div>
+     </div>
+            <p className='text-center'>Please Login</p>
+            <form className="card-body" onSubmit={handleSubmit(handleLogin)}>
+                <fieldset className="fieldset">
+                    {/* email field */}
+                    <label className="label">Email</label>
+                    <input type="email" {...register('email', { required: true })} className="input" placeholder="Email" />
+                    {
+                        errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>
+                    }
+
+                    {/* password field */}
+                    <label className="label">Password</label>
+                    <input type="password" {...register('password', { required: true, minLength: 6 })} className="input" placeholder="Password" />
+                    {
+                        errors.password?.type === 'minLength' && <p className='text-red-500'>Password must be 6 characters  or longer </p>
+                    }
+
+
+                    <div><a className="link link-hover">Forgot password?</a></div>
+                    <button className="btn btn-primary mt-4 hover:bg-base-200 border-0 hover:text-primary">Login</button>
+                </fieldset>
+                <p>New to <span className='text-center text-[16px] text-[#f111db]'>Club<spn className='text-[#487ce0]'>Sphere!</spn></span> <Link
+                    state={location.state}
+                    className='text-blue-400 underline'
+                    to="/register">Register </Link> here....</p>
+            </form>
+           
+        </div>
+ 
+  </Container>
   </div>
 </div>
-        </Container>
+       
         </div>
         </>
        

@@ -5,6 +5,7 @@ import { useLocation, useNavigate ,Link} from 'react-router';
 import useAxiosSecure from '../../../CustomHooks/useAxiosSecure';
 import useAuth from '../../../CustomHooks/useAuth';
 import Logo from '../../../Components/logo/Logo';
+import axios from 'axios';
 
 
 const Register = () => {
@@ -19,16 +20,62 @@ const {createUser,updateUserProfile } = useAuth();
 const location = useLocation();
 
 // navigate 
-// const navigate = useNavigate();
+const navigate = useNavigate();
 
 // axios calling
-// const axiosSecure = useAxiosSecure(); 
+const axiosSecure = useAxiosSecure(); 
 
 
 const handleRegistration =(data)=>{
     console.log(data);
-    createUser(data.email, data.pasword)
-    .the(()=>{
+
+    // phptpImg to store photo 
+    const profileImg = data.photo[0];
+
+
+    createUser(data.email, data.password)
+    .then(()=>{
+         // 1. store the image in form data
+         const formData = new FormData();
+         formData.append('image', profileImg);
+
+
+          // 2. send the photo to store and get the ul
+                const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`
+
+          //3. post on axios
+          axios.post(image_API_URL, formData)
+          .then(res => {
+              const photoURL = res.data.data.url;
+
+              // create user in the database
+              const userInfo = {
+                  email: data.email,
+                  displayName: data.name,
+                  photoURL: photoURL
+              }
+              axiosSecure.post('/users', userInfo)
+                  .then(res => {
+                      if (res.data.insertedId) {
+                          console.log('user created in the database');
+                      }
+                  })
+
+
+                        // update user profile to firebase
+                        const userProfile = {
+                          displayName: data.name,
+                          photoURL: photoURL
+                      }
+
+                      updateUserProfile(userProfile)
+                          .then(() => {
+                           
+                              navigate(location.state || '/');
+                          })
+                          .catch(error => console.log(error))
+                  })
+                
 
     })
     .catch(error=>{
@@ -41,7 +88,7 @@ const handleRegistration =(data)=>{
         <>
         <div className='bg-base-200'>
         <div className="hero  min-h-screen">
-     <div className="card bg-base-100 lg:w-full mx-auto max-w-2xl shrink-0 shadow-2xl mt-10">
+     <div className="card bg-base-100 w-sm lg:w-full mx-auto max-w-xl shrink-0 shadow-2xl mt-10">
 
       <Container className='my-4'>
         <div className='flex justify-center items-center my-4'>
@@ -51,7 +98,7 @@ const handleRegistration =(data)=>{
         </div>
             
             <p className='text-center text-xl text-primary'>Please Register</p>
-            <form className="card-body items-center" onSubmit={handleSubmit(handleRegistration)}>
+            <form className="card-body" onSubmit={handleSubmit(handleRegistration)}>
                 <fieldset className="fieldset">
                     {/* name field */}
                     <label className="label">Name</label>
@@ -89,7 +136,7 @@ const handleRegistration =(data)=>{
                         </p>
                     }
                     {
-                        errors.password?.type === 'pattern' && <p className='text-red-500'>Password must have at least one uppercase, at least one lowercase, at least one number, and at least one special characters</p>
+                        errors.password?.type === 'pattern' && <p className='text-red-500 text-center'>Password must have at least one uppercase, at least one lowercase, at least one number, and at least one special characters</p>
                     }
 
                     <button className="btn btn-primary mt-4 hover:bg-base-200 border-0 hover:text-primary">Register</button>
