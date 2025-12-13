@@ -60,14 +60,14 @@ const { signInUser } = useAuth();
                 <fieldset className="fieldset">
                     {/* email field */}
                     <label className="label">Email</label>
-                    <input type="email" {...register('email', { required: true })} className="input" placeholder="Email" />
+                    <input type="email" {...register('email', { required: true })} className="input max-w-xl input-bordered lg:w-[500px]" placeholder="Email" />
                     {
                         errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>
                     }
 
                     {/* password field */}
                     <label className="label">Password</label>
-                    <input type="password" {...register('password', { required: true, minLength: 6 })} className="input" placeholder="Password" />
+                    <input type="password" {...register('password', { required: true, minLength: 6 })} className="input input-bordered max-w-xl  lg:w-[500px]" placeholder="Password" />
                     {
                         errors.password?.type === 'minLength' && <p className='text-red-500'>Password must be 6 characters  or longer </p>
                     }

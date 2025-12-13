@@ -37,7 +37,10 @@ const Navbar = () => {
 
   {
     user &&  <><li><a className='text-[18px]'><NavLink to ="myprofile" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
-  }>My Profile</NavLink></a></li></>
+  }>My Profile</NavLink></a></li>
+  
+  <li><a className='text-[18px]'><NavLink to ="/dashboard" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
+  }>Dashboard</NavLink></a></li></>
   }
  
   
@@ -67,11 +70,29 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
+    <div className='search-box mr-4'>
+    <label className="input border border-neutral">
+  <svg className="h-[1em] opacity-50 text-primary " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <g
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      strokeWidth="2.5"
+      fill="none"
+      stroke="currentColor"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.3-4.3"></path>
+    </g>
+  </svg>
+  <input type="search" className='text-primary' required placeholder="Search" />
+</label>
+    </div>
+
 
     {
       user? <div className='flex justify-center items-center gap-4'>
         <a className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
-    text-primary" onClick={handleSignout}>SignOut</a> 
+    text-primary rounded-3xl" onClick={handleSignout}>SignOut</a> 
 
       <a className='text-center text-sm text-primary'><NavLink to={"/myprofile"}> {user?.photoURL && (
               <img
@@ -84,7 +105,7 @@ const Navbar = () => {
       </div>
     :
     <a className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
-    text-primary"><NavLink to={'/login'}>Login</NavLink></a>
+    text-primary rounded-3xl"><NavLink to={'/login'}>Login</NavLink></a>
     }
     
   </div>

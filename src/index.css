@@ -17,3 +17,37 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+[data-tip]::after {
+  background-color: #487ce0 !important; /* yellow-300 */
+}
+[data-tip]::before {
+  background-color: #487ce0 !important; /* yellow-300 */
+}
+
+.zigzag-card {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 85%,
+    95% 90%,
+    90% 85%,
+    85% 90%,
+    80% 85%,
+    75% 90%,
+    70% 85%,
+    65% 90%,
+    60% 85%,
+    55% 90%,
+    50% 85%,
+    45% 90%,
+    40% 85%,
+    35% 90%,
+    30% 85%,
+    25% 90%,
+    20% 85%,
+    15% 90%,
+    10% 85%,
+    5% 90%,
+    0 85%
+  );
+}
