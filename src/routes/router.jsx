@@ -51,13 +51,16 @@ children:[
 
     // only admin routes 
     {
-        path: '/dashboard/admindashboard',
-        element: <AdminRoute><AdminDashboard></AdminDashboard></AdminRoute>
+        path: '/admin',
+        element: <AdminRoute><AdminDashboard></AdminDashboard></AdminRoute>,
+        children: [
+            {
+                path: "users",
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            }
+        ]
     },
-    {
-        path: '/dashboard/users',
-        element: <AdminDashboard><AllUsers></AllUsers></AdminDashboard>
-    }
+  
 ]
 }
     

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import UpcomingEvent from './UpcomingEvent';
 
 
 const UpcomingEvents = () => {
@@ -28,13 +29,13 @@ const UpcomingEvents = () => {
              modules={[EffectCoverflow, Pagination, Autoplay]}
              className="mySwiper">
            
+           <SwiperSlide><UpcomingEvent></UpcomingEvent></SwiperSlide>
 
-           <swiperSlide>
-            Slide1
-           </swiperSlide>
-           <swiperSlide>
-            Slide1
-           </swiperSlide>
+          {/* {
+            EventSource.map(event => <SwiperSlide key={event.id}>
+                <UpcomingEvent event={event}></UpcomingEvent>
+            </SwiperSlide>)
+          } */}
         </Swiper>
         
         </>

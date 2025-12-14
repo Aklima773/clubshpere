@@ -4,12 +4,27 @@ import useAuth from '../../../CustomHooks/useAuth';
 import { toast } from 'react-toastify';
 import { FaUsersGear } from "react-icons/fa6";
 import Container from '../../../Components/Container/Container';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../CustomHooks/useAxiosSecure';
 
 
 
 const Dahsboard = () => {
     const {user,logOut} = useAuth();
-     
+     const axiosSecure = useAxiosSecure();
+
+    //calling users data from db
+    const { data: userRole, isLoading } = useQuery({
+      queryKey: ['userRole', user?.email],
+      enabled: !!user?.email,
+      queryFn: async () => {
+        const res = await axiosSecure.get(`/users/role/${user.email}`);
+        return res.data.role;
+      }
+    });
+    
+
+
 
     // const {role} =useRole();
     //signout function handle
@@ -124,14 +139,22 @@ const Dahsboard = () => {
 
               {/* //all users  */}
               <li>
-                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Users" >
-                <NavLink to='/dashboard/users'>
-                  {/* Settings icon */}
-                  <FaUsersGear className="bg-primary" />
 
-                  <span className="is-drawer-close:hidden">Users</span>
-                  </NavLink>
-                </button>
+              <li>
+{!isLoading && userRole === "admin" && (
+ <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3 -ml-3" data-tip="Users">
+    <NavLink
+      to="/dashboard/admin/users"
+      className=""
+      data-tip="Users"
+    >
+      <FaUsersGear />
+      <span className="is-drawer-close:hidden">Users</span>
+    </NavLink>
+    </button>
+  )}
+</li>
+
                 
               </li>
             </ul>
