@@ -5,6 +5,10 @@ import BannerSection from '../../Components/Banner/BannerSection';
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import MarqueeSlider from '../../Components/MarqueeSlider/MarqueeSlider';
+import UpcomingEvents from '../../Components/UpCommingEvents/UpcomingEvents';
+import AboutUs from '../../Components/AboutUs/AboutUs';
+import HowitWorks from '../../Components/HowitWorks/HowitWorks';
+import JoinMeetup from '../../Components/JoinMeetUp/JoinMeetup';
 
 const Home = () => {
     return (
@@ -12,6 +16,11 @@ const Home = () => {
 
        <BannerSection></BannerSection>
        <MarqueeSlider></MarqueeSlider>
+       <UpcomingEvents></UpcomingEvents>
+       <AboutUs></AboutUs>
+       <HowitWorks></HowitWorks>
+       <JoinMeetup></JoinMeetup>
+       
         </>
     );
 };

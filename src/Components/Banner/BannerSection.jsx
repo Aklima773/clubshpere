@@ -11,7 +11,9 @@ const BannerSection = () => {
         <Container>
         <Carousel
            autoPlay={true}
-           infiniteLoop={true}>
+           infiniteLoop={true}
+           showThumbs={false}
+           showStatus={false}>
         <div className='1'>
         <div className='main-content relative rounded-bl-3xl rounded-br-3xl bg-[#77a1ee] p-8 '>
 
