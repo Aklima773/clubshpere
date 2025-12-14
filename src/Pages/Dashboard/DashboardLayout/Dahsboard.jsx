@@ -4,24 +4,17 @@ import useAuth from '../../../CustomHooks/useAuth';
 import { toast } from 'react-toastify';
 import { FaUsersGear } from "react-icons/fa6";
 import Container from '../../../Components/Container/Container';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../CustomHooks/useAxiosSecure';
+import { ImProfile } from "react-icons/im";
+import useRole from '../../../CustomHooks/useRole';
+import { MdAppRegistration } from "react-icons/md";
 
 
 
 const Dahsboard = () => {
     const {user,logOut} = useAuth();
-     const axiosSecure = useAxiosSecure();
+    
 
-    //calling users data from db
-    const { data: userRole, isLoading } = useQuery({
-      queryKey: ['userRole', user?.email],
-      enabled: !!user?.email,
-      queryFn: async () => {
-        const res = await axiosSecure.get(`/users/role/${user.email}`);
-        return res.data.role;
-      }
-    });
+    const {role, roleLoading} =useRole();
     
 
 
@@ -128,21 +121,22 @@ const Dahsboard = () => {
       
               {/* List item */}
               <li>
-                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
+                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="My Profile">
                   {/* Settings icon */}
-                  <NavLink to="/">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4 bg-primary"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
-                  <span className="is-drawer-close:hidden">Settings</span>
+                  <NavLink to="/myprofile">
+                  <ImProfile />
+                  <span className="is-drawer-close:hidden">My Profile</span>
                   </NavLink>
                 </button>
               </li>
 
               {/* //all users  */}
+             
+              {!roleLoading && (role === "admin" || role === "club-manager") && (
+                <>
               <li>
 
-              <li>
-{!isLoading && userRole === "admin" && (
- <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3 -ml-3" data-tip="Users">
+ <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Users">
     <NavLink
       to="/dashboard/admin/users"
       className=""
@@ -152,11 +146,31 @@ const Dahsboard = () => {
       <span className="is-drawer-close:hidden">Users</span>
     </NavLink>
     </button>
-  )}
 </li>
 
-                
+<li>
+                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Registration Requests">
+                  {/* Settings icon */}
+                  <NavLink to="/clubreq">
+                  <MdAppRegistration />
+                  <span className="is-drawer-close:hidden">Club Regestration</span>
+                  </NavLink>
+                </button>
               </li>
+
+              <li>
+                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Create Club">
+                  {/* Settings icon */}
+                  <NavLink to="/dashboard/admin/createclubs">
+                  <MdAppRegistration />
+                  <span className="is-drawer-close:hidden">Create Club</span>
+                  </NavLink>
+                </button>
+              </li>
+              </>
+                 )}
+ 
+            
             </ul>
           </div>
         </div>

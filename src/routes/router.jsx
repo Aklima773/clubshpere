@@ -10,6 +10,7 @@ import AdminRoute from './AdminRoute/AdminRoute';
 import Dahsboard from '../Pages/Dashboard/DashboardLayout/Dahsboard';
 import AdminDashboard from '../Pages/Dashboard/AdminDashboard/AdminDashboard';
 import AllUsers from '../Pages/Users/AllUsers';
+import CreateClubs from '../Pages/CreateClub/CreateClubs';
 
 
 const router = createBrowserRouter([
@@ -51,12 +52,16 @@ children:[
 
     // only admin routes 
     {
-        path: '/admin',
+        path: 'admin',
         element: <AdminRoute><AdminDashboard></AdminDashboard></AdminRoute>,
         children: [
             {
                 path: "users",
-                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+                element: <AllUsers></AllUsers>
+            },
+            {
+                path: "createclubs",
+                element: <CreateClubs></CreateClubs>
             }
         ]
     },

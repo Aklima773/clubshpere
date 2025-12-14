@@ -1,9 +1,10 @@
 import React from 'react';
+import { Outlet } from 'react-router';
 
 const MemberDashboard = () => {
     return (
         <div>
-            Member Dashboard
+            <Outlet></Outlet>
         </div>
     );
 };

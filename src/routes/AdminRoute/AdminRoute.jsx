@@ -14,10 +14,10 @@ const AdminRoute = ({children}) => {
     return <Loading></Loading>
   }
 
-  if(role !== 'admin'){
-    return <Forbidden></Forbidden>
-  }
+  if(role === 'admin' || role ==='club-manager'){
     return children;
+  }
+    return <Forbidden/>;
 };
 
 export default AdminRoute;
