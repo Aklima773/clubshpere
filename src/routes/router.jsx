@@ -28,6 +28,7 @@ const router = createBrowserRouter([
                 path: '/myprofile',
                 element: <PrivateRoutes><MyProfile></MyProfile></PrivateRoutes>
             },
+            
 
            
         ]
@@ -62,7 +63,9 @@ children:[
             {
                 path: "createclubs",
                 element: <CreateClubs></CreateClubs>
-            }
+                
+            },
+           
         ]
     },
   

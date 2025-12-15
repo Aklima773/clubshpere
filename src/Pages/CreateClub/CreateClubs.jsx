@@ -1,24 +1,112 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch} from 'react-hook-form';
 import useAuth from '../../CustomHooks/useAuth';
+import useAxiosSecure from '../../CustomHooks/useAxiosSecure';
+import { useNavigate } from 'react-router';
+import useCities from '../../CustomHooks/useCities';
+import useCategories from '../../CustomHooks/useCategories';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const CreateClubs = () => {
 
-    const {user} =useAuth();
+    
 // call useForm 
     const {
         register,
         handleSubmit,
+        control,
+        formState: {errors}
   
         // formState: { errors } 
     } = useForm();
 
-    const handleCreateClub = (data)=>{
-        console.log(data)
+    const {user} =useAuth();
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
+
+
+    // calling avaialable citie 
+    const { cities} = useCities();
+
+    const selectedCity = useWatch({ control, name: "city" });
+
+    const selectedCityData = cities.find(
+        (item) => item.city === selectedCity
+      );
+      
+      const areas = selectedCityData?.areas || [];
+
+
+      //categories calling
+
+      const { categories} = useCategories();
+
+      const selectedCategory = useWatch({control, name: 'category' })
+      const selectedCategoryData = categories.find((item)=> item.category === selectedCategory)
+      
+// handle cost 
+const membershipCost = useWatch({control, name:"membershipCost"});
+
+
+// bannaer image 
+
+
+const handleCreateClub = async (data) => {
+    try {
+        console.log(data);
+
+        const clubImg = data.clubImage[0];
+        const formData = new FormData();
+        formData.append('image', clubImg);
+
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`;
+        
+        const imgRes = await axios.post(image_API_URL, formData);
+        const photoURL = imgRes.data.data.url;
+
+        const clubInfo = {
+            clubName: data['Club Name'],
+            description: data.clubDescription,
+            category: data.category,
+            location: {
+                city: data.city,
+                area: data.area
+            },
+            bannerImage: photoURL,
+            membershipFee: data.membershipCost === 'Paid' ? Number(data.amount) : 0,
+            status: 'pending',
+            managerEmail: data.managerEmail,
+            createdAt: new Date()
+        };
+
+        const res = await axiosSecure.post('/clubs', clubInfo);
+        console.log('after saving club', res.data);
+
+        if (res.data.insertedId) {
+            navigate('/dashboard/myClubs');
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Club has been created. Please wait for approval!",
+                showConfirmButton: false,
+                timer: 2500
+            });
+        }
+
+    } catch (err) {
+        console.error(err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong while creating the club!'
+        });
     }
+};
+
     return (
         <div>
-        <h2 className="text-5xl font-bold">Create Club</h2>
+        <h2 className="text-5xl font-bold text-primary">Create Club</h2>
         <form onSubmit={handleSubmit(handleCreateClub)} className='mt-12 p-4 text-black'>
           
             {/* {Club info} */}
@@ -29,14 +117,12 @@ const CreateClubs = () => {
                 </fieldset>
                 <fieldset className="fieldset">
                         <legend className="fieldset-legend">Club Category</legend>
-                        <select {...register('clubcategory')} defaultValue="Select a category" className="select">
+                        <select {...register('category')} defaultValue={selectedCategoryData} className="select">
                             <option >Select a Category</option>
                             <option value="photography" >Photograpgy</option>
                             <option value="sports">Sports</option>
                             <option value="technology">Technology</option>
-                            {/* {
-                                regions.map((r, i) => <option key={i} value={r}>{r}</option>)
-                            } */}
+                         
                         </select>
                     </fieldset>
 
@@ -47,90 +133,103 @@ const CreateClubs = () => {
                 {/* other Details */}
 
                 <fieldset className="fieldset">
-                    <h4 className="text-2xl font-semibold">Details of Club</h4>
+                    <h4 className="text-2xl font-semibold text-primary">Details of Club</h4>
                     {/* Creator name */}
-                    <label className="label">Club Creator</label>
-                    <input type="text" {...register('senderName')}
+                    <label className="label">Club Manager</label>
+                    <input type="text" {...register('managerName')}
                         defaultValue={user?.displayName}
-                        className="input w-full" placeholder="Sender Name" />
+                        className="input w-full" placeholder="managerName" />
 
                     {/* managCreatorer email */}
-                    <label className="label">Club Creator Email</label>
-                    <input type="text" {...register('creatorEmail')}
+                    <label className="label">Manager Email</label>
+                    <input type="text" {...register('managerEmail')}
                         defaultValue={user?.email}
-                        className="input w-full" placeholder="Creator Email" />
+                        className="input w-full" placeholder="Manager Email" />
 
-                    {/* sender region */}
-                    <fieldset className="fieldset">
-                        <legend className="fieldset-legend">Sender Regions</legend>
-                        <select {...register('senderRegion')} defaultValue="Pick a region" className="select">
-                            <option disabled={true}>Pick a region</option>
-                            {/* {
-                                regions.map((r, i) => <option key={i} value={r}>{r}</option>)
-                            } */}
-                        </select>
-                    </fieldset>
-
-                    {/* sender districts */}
-                    <fieldset className="fieldset">
-                        <legend className="fieldset-legend">Sender Districts</legend>
-                        <select {...register('senderDistrict')} defaultValue="Pick a district" className="select">
-                            <option disabled={true}>Pick a district</option>
-                            {/* {
-                                districtsByRegion(senderRegion).map((r, i) => <option key={i} value={r}>{r}</option>)
-                            } */}
-                        </select>
-                    </fieldset>
+                   
 
 
-                    {/* sender address */}
-                    <label className="label mt-4">Sender Address</label>
-                    <input type="text" {...register('senderAddress')} className="input w-full" placeholder="Sender Address" />
+                    {/* descriotion */}
+                    <label className="label mt-4">Club Description</label>
+                    <textarea type="text" {...register('clubDescription')} className="input w-full h-30" placeholder="Write here" />
+
+                {/* status  */}
+
+
+                    <label className="label">Status</label>
+                    <input type="text" {...register('status')} defaultValue={'pending'} className="input w-full" placeholder="status" />
+            
+
 
 
                 </fieldset>
-                {/* receiver Details */}
+
+
+     
+           
+
+           {/* location  */}
                 <fieldset className="fieldset">
-                    <h4 className="text-2xl font-semibold">Receiver Details</h4>
-                    {/* receiver name */}
-                    <label className="label">Receiver Name</label>
-                    <input type="text" {...register('receiverName')} className="input w-full" placeholder="Receiver Name" />
+                    
+                    
+                    <label className="label">Location City</label>
+                    <select {...register("city")} className="select select-bordered w-full">
+  <option value="">Select City</option>
+  {cities.map((item) => (
+    <option key={item._id} value={item.city}>
+      {item.city}
+    </option>
+  ))}
+</select>
 
-                    {/* receiver email */}
-                    <label className="label">Receiver Email</label>
-                    <input type="text" {...register('receiverEmail')} className="input w-full" placeholder="Receiver Email" />
+          
+                    <label className="label">Area Name</label>
+                    <select {...register("area")} className="select select-bordered w-full mt-4">
+  <option value="">Select Area</option>
 
-                    {/* receiver region */}
-                    <fieldset className="fieldset">
-                        <legend className="fieldset-legend">Receiver Regions</legend>
-                        <select {...register('receiverRegion')} defaultValue="Pick a region" className="select">
-                            <option disabled={true}>Pick a region</option>
-                            {/* {
-                                regions.map((r, i) => <option key={i} value={r}>{r}</option>)
-                            } */}
-                        </select>
-                    </fieldset>
+  {areas.map((area, index) => (
+    <option key={index} value={area}>
+      {area}
+    </option>
+  ))}
+</select>
 
-                    {/* receiver district */}
-                    <fieldset className="fieldset">
-                        <legend className="fieldset-legend">Receiver District</legend>
-                        <select {...register('receiverDistrict')} defaultValue="Pick a district" className="select">
-                            <option disabled={true}>Pick a district</option>
-                            {/* {
-                                districtsByRegion(receiverRegion).map((d, i) => <option key={i} value={d}>{d}</option>)
-                            } */}
-                        </select>
-                    </fieldset>
+         
 
 
-                    {/* receiver address */}
-                    <label className="label mt-4">Receiver Address</label>
-                    <input type="text" {...register('receiverAddress')} className="input w-full" placeholder="Receiver Address" />
+                    {/* upload image*/}
+                    <label className="label mt-4"> Club Banner Image</label>
+                    <input type="file" {...register('clubImage')} className="input file-input file-input-bordered w-full" placeholder="Club Image Upload" />
+                 {errors.name?.type === 'required' && <p className='text-red-500'>Photo is required.</p>}
 
+
+{/* Payment  */}
+          <label className="label mt-4"> Membership Cost</label>
+                 <select {...register("membershipCost")} className="select select-bordered w-full mt-4">
+
+
+
+  <option value="">Select Cost</option>
+    <option  value={"Paid"}>Paid</option>
+    <option  value={"Free"}>Free</option>
+  
+</select>
+
+{membershipCost === "Paid" && (
+        <>
+          <label className="label mt-4">Enter Amount</label>
+          <input
+            type="number"
+            {...register("amount")}
+            placeholder="Enter membership amount"
+            className="input input-bordered w-full mt-2"
+          />
+        </>
+      )}
 
                 </fieldset>
             </div>
-            <input type="submit" className='btn btn-primary mt-8 text-black' value="Send Parcel" />
+            <input type="submit" className='btn bg-primary text-white hover:bg-base-200 hover:text-black mt-8 text-black' value="Creat Club" />
         </form>
     </div>
     );

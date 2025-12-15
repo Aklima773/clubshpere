@@ -7,6 +7,7 @@ import Container from '../../../Components/Container/Container';
 import { ImProfile } from "react-icons/im";
 import useRole from '../../../CustomHooks/useRole';
 import { MdAppRegistration } from "react-icons/md";
+import { IoCreate } from "react-icons/io5";
 
 
 
@@ -162,7 +163,7 @@ const Dahsboard = () => {
                 <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Create Club">
                   {/* Settings icon */}
                   <NavLink to="/dashboard/admin/createclubs">
-                  <MdAppRegistration />
+                  <IoCreate />
                   <span className="is-drawer-close:hidden">Create Club</span>
                   </NavLink>
                 </button>
