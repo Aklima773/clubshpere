@@ -1,25 +1,29 @@
 import React from 'react';
 import useAuth from '../../../CustomHooks/useAuth';
 import useAxiosSecure from '../../../CustomHooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient} from '@tanstack/react-query';
 import Loading from '../../../Components/Loading/Loading';
 import { RiFileEditFill } from "react-icons/ri";
 import { MdBrowserUpdated } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
 import { NavLink } from 'react-router';
-import { toast } from 'react-toastify';
+
+import Swal from 'sweetalert2';
 
 const MyClubs = () => {
 
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
+    const queryClient = useQueryClient();
 
-    const { isLoading: clubsLoading, data: clubs =[] ,refetch} = useQuery({
+    const { isLoading: clubsLoading, data: clubs =[]} = useQuery({
         queryKey: ['myClubs', user?.email],
+        enabled: !!user?.email,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/myclubs/${user.email}`);
+            return axiosSecure.get(`/myclubs/${user.email}`)
+            .then(res=>res.data)
             
-            return res.data;
+            
         }
     })
 
@@ -28,25 +32,52 @@ const MyClubs = () => {
 
     const handleDelete =(id)=>{
 
-      const confirmDelete = window.confirm(
-        "Are you sure You want to delete this club?"
+      console.log(id);
+
+
+ Swal.fire({
+        title: 'Are you sure?',
+        text: 'This club will be permanently deleted!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#e11d48',
+        cancelButtonColor: '#6b7280',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) =>{
+
+        if(!result.isConfirmed) return;
+
+
+          axiosSecure.delete(`/clubs/${id}`)
+          .then(res=>{
+            if(res.data.deletedCount === 1){
+              queryClient.setQueryData(['myClubs', user.email], oldData => {
+                if (!oldData) return [];
+                return oldData.filter(club => club._id !== id);
+              });
+
+             
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your parcel request has been deleted.",
+                icon: "success"
+            });
+            }
+          })
+          .catch(err=>{
+            console.log(err)
+          })
+         
+        }
       )
+    
 
-      if(!confirmDelete) return;
-
-      axiosSecure.delete(`/clubs/${id}`)
-      .then(res=>{
-      console.log(res);
-      toast.success("Successfully Deleted")
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+      
       
     }
     
 
-
+    if (clubsLoading) return <Loading />;
     return (
         <div>
            <h2 className="text-3xl font-extrabold mb-6 text-primary">My Clubs</h2>
@@ -58,6 +89,7 @@ const MyClubs = () => {
     <thead>
       <tr className='text-xl text-secondary'>
        <th>SL.</th>
+       <th>Club Banner</th>
         <th>Club Name</th>
         <th>Category</th>
         <th>Location</th>
@@ -71,18 +103,20 @@ const MyClubs = () => {
       {/* row 1 */}
 
       
-      {clubsLoading ? (
-  <Loading />
-) : clubs.length === 0 ? (
-  <p>No clubs created yet</p>
+      { clubs.length === 0 ? (
+  <tr>
+  <td colSpan={8} className="text-center">
+    No clubs created yet
+  </td>
+</tr>
 ) : (
   clubs.map((club,index) => (
     <tr key={club._id} className='text-[18px]'>
         <td>{index + 1}</td>
+        <td className=""><img src={club.bannerImage} alt="" className="max-w-[80px]"/></td>
       <td>{club.clubName}</td>
       <td>{club.category}</td>
-      <td>{club.membershipFee === 0 ? "Free" : club.membershipFee}</td>
-
+      <td>{club.location?.city},{club.location?.area}</td>
       <td>
   {club.membershipFee === 0
     ? "Free"
@@ -127,6 +161,7 @@ const MyClubs = () => {
     <tfoot >
       <tr className='text-neutral'>
       <th>SL.</th>
+      <th>Club Banner</th>
         <th>Club Name</th>
         <th>Category</th>
         <th>Location</th>

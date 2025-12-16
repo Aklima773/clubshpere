@@ -9,11 +9,12 @@ import UpcomingEvents from '../../Components/UpCommingEvents/UpcomingEvents';
 import AboutUs from '../../Components/AboutUs/AboutUs';
 import HowitWorks from '../../Components/HowitWorks/HowitWorks';
 import JoinMeetup from '../../Components/JoinMeetUp/JoinMeetup';
+import { ToastContainer } from 'react-toastify';
 
 const Home = () => {
     return (
         <>
-
+<ToastContainer/>
        <BannerSection></BannerSection>
        <MarqueeSlider></MarqueeSlider>
        <UpcomingEvents></UpcomingEvents>
