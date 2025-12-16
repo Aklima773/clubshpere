@@ -8,6 +8,7 @@ import { ImProfile } from "react-icons/im";
 import useRole from '../../../CustomHooks/useRole';
 import { MdAppRegistration } from "react-icons/md";
 import { IoCreate } from "react-icons/io5";
+import { MdBusinessCenter } from "react-icons/md";
 
 
 
@@ -133,7 +134,7 @@ const Dahsboard = () => {
 
               {/* //all users  */}
              
-              {!roleLoading && (role === "admin" || role === "club-manager") && (
+              {!roleLoading && (role === "admin") && (
                 <>
               <li>
 
@@ -159,18 +160,40 @@ const Dahsboard = () => {
                 </button>
               </li>
 
+            
+              </>
+
+
+
+// only manager route 
+                 )}
+   {!roleLoading && (role === "club-manager") && (
+                <>
+
+{/* create club  */}
               <li>
                 <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Create Club">
                   {/* Settings icon */}
-                  <NavLink to="/dashboard/admin/createclubs">
+                  <NavLink to="/dashboard/manager/createclubs">
                   <IoCreate />
                   <span className="is-drawer-close:hidden">Create Club</span>
                   </NavLink>
                 </button>
               </li>
+
+{/* My clubs list  */}
+
+              <li>
+                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="My Clubs">
+                  {/* Settings icon */}
+                  <NavLink to="/dashboard/manager/myclubs">
+                  <MdBusinessCenter />
+                  <span className="is-drawer-close:hidden">My Clubs</span>
+                  </NavLink>
+                </button>
+              </li>
               </>
                  )}
- 
             
             </ul>
           </div>

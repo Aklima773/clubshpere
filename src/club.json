@@ -1,0 +1,48 @@
+[
+    {
+      "clubName": "Shutterbugs Photography Club",
+      "description": "A community of photography enthusiasts who meet weekly to share tips, projects, and go on photo walks.",
+      "category": "Photography",
+      "location": {
+        "city": "Dhaka",
+        "area": "Gulshan"
+      },
+      "bannerImage": "https://example.com/images/shutterbugs-banner.jpg",
+      "membershipFee": 500, 
+      "status": "pending", 
+      "managerEmail": "manager1@example.com",
+      "createdAt": "2025-12-15T10:30:00Z",
+      "updatedAt": "2025-12-15T10:30:00Z"
+    },
+    {
+      "clubName": "Tech Innovators Hub",
+      "description": "A club for tech enthusiasts and developers to collaborate on projects and share knowledge.",
+      "category": "Tech",
+      "location": {
+        "city": "Chittagong",
+        "area": "Agrabad"
+      },
+      "bannerImage": "https://example.com/images/tech-hub.jpg",
+      "membershipFee": 0, 
+      "status": "approved", 
+      "managerEmail": "manager2@example.com",
+      "createdAt": "2025-11-01T08:00:00Z",
+      "updatedAt": "2025-12-01T12:00:00Z"
+    },
+    {
+      "clubName": "City Sports Club",
+      "description": "Organizes local sports events including football, basketball, and cricket for enthusiasts of all ages.",
+      "category": "Sports",
+      "location": {
+        "city": "Khulna",
+        "area": "Sonadanga"
+      },
+      "bannerImage": "https://example.com/images/city-sports.jpg",
+      "membershipFee": 200, 
+      "status": "rejected", 
+      "managerEmail": "manager3@example.com",
+      "createdAt": "2025-10-20T14:45:00Z",
+      "updatedAt": "2025-11-05T16:20:00Z"
+    }
+  ]
+  

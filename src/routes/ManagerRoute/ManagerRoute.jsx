@@ -1,12 +1,12 @@
 import React from 'react';
-import Container from '../../Components/Container/Container';
+import Loading from '../../Components/Loading/Loading';
 import useAuth from '../../CustomHooks/useAuth';
 import useRole from '../../CustomHooks/useRole';
-import Loading from '../../Components/Loading/Loading';
 import Forbidden from '../../Components/Forbiden/Forbidden';
 
-const AdminRoute = ({children}) => {
-
+const ManagerRoute = ({children}) => {
+    
+        
   const {loading} = useAuth();
   const {role, roleLoading} = useRole();
 
@@ -14,10 +14,11 @@ const AdminRoute = ({children}) => {
     return <Loading></Loading>
   }
 
-  if(role === 'admin' ){
+  if(role === 'club-manager'  ){
     return children;
   }
     return <Forbidden/>;
 };
 
-export default AdminRoute;
+
+export default ManagerRoute;

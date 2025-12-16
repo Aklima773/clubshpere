@@ -84,7 +84,7 @@ const handleCreateClub = async (data) => {
         console.log('after saving club', res.data);
 
         if (res.data.insertedId) {
-            navigate('/dashboard/myClubs');
+            navigate('/dashboard/manager/myClubs');
             Swal.fire({
                 position: "top-end",
                 icon: "success",

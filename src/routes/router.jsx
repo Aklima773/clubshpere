@@ -11,6 +11,10 @@ import Dahsboard from '../Pages/Dashboard/DashboardLayout/Dahsboard';
 import AdminDashboard from '../Pages/Dashboard/AdminDashboard/AdminDashboard';
 import AllUsers from '../Pages/Users/AllUsers';
 import CreateClubs from '../Pages/CreateClub/CreateClubs';
+import MyClubs from '../Pages/Dashboard/ManagerDashboard/MyClubs';
+import ManagerDashboard from '../Pages/Dashboard/ManagerDashboard/ManagerDashboard';
+import ManagerRoute from './ManagerRoute/ManagerRoute';
+import MyClubsUpdate from '../Pages/Dashboard/ManagerDashboard/MyClubsUpdate';
 
 
 const router = createBrowserRouter([
@@ -60,14 +64,31 @@ children:[
                 path: "users",
                 element: <AllUsers></AllUsers>
             },
+         
+            
+           
+        ]
+    },
+
+    {
+        path:'manager',
+        element: <ManagerRoute><ManagerDashboard></ManagerDashboard></ManagerRoute>,
+        children: [
             {
                 path: "createclubs",
                 element: <CreateClubs></CreateClubs>
                 
             },
-           
+            {
+                path: "myclubs",
+                element: <MyClubs></MyClubs>
+            },
+            {
+                path:"myclubs/:id",
+                element: <MyClubsUpdate></MyClubsUpdate>
+            }
         ]
-    },
+    }
   
 ]
 }
