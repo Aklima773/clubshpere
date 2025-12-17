@@ -1,7 +1,7 @@
 import React from 'react';
 import useAuth from '../../../CustomHooks/useAuth';
 import useAxiosSecure from '../../../CustomHooks/useAxiosSecure';
-import { useQuery, useQueryClient} from '@tanstack/react-query';
+import { useQuery} from '@tanstack/react-query';
 import Loading from '../../../Components/Loading/Loading';
 import { RiFileEditFill } from "react-icons/ri";
 import { MdBrowserUpdated } from "react-icons/md";
@@ -14,9 +14,9 @@ const MyClubs = () => {
 
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
-    const queryClient = useQueryClient();
+    
 
-    const { isLoading: clubsLoading, data: clubs =[]} = useQuery({
+    const { isLoading: clubsLoading, data: clubs =[],refetch} = useQuery({
         queryKey: ['myClubs', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
@@ -47,26 +47,24 @@ const MyClubs = () => {
 
         if(!result.isConfirmed) return;
 
+        axiosSecure.delete(`/clubs/${id}`)
+        .then(res => {
+            console.log(res.data);
 
-          axiosSecure.delete(`/clubs/${id}`)
-          .then(res=>{
-            if(res.data.deletedCount === 1){
-              queryClient.setQueryData(['myClubs', user.email], oldData => {
-                if (!oldData) return [];
-                return oldData.filter(club => club._id !== id);
-              });
+            if (res.data.deletedCount) {
+                // refresh the data in the ui
+                refetch();
 
-             
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your parcel request has been deleted.",
-                icon: "success"
-            });
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your parcel request has been deleted.",
+                    icon: "success"
+                });
             }
-          })
-          .catch(err=>{
-            console.log(err)
-          })
+
+        })
+
+
          
         }
       )
@@ -84,7 +82,7 @@ const MyClubs = () => {
 
 
 <div className="overflow-x-auto">
-  <table className="table">
+  <table className="table border-separate border-spacing-y-3">
     {/* head */}
     <thead>
       <tr className='text-xl text-secondary'>
@@ -95,6 +93,7 @@ const MyClubs = () => {
         <th>Location</th>
         <th>Membership Fee</th>
         <th>Created At</th>
+        <th>Updated At</th>
         <th>status</th>
         <th>Action</th>
       </tr>
@@ -125,24 +124,50 @@ const MyClubs = () => {
     : "N/A"}
 </td>
 
-      <td>{club.createdAt}</td>
+      
+   <td> {new Date(club.createdAt).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })}</td>
+   <td> {new Date(club.updatedAt)?.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  })}</td>
       <td><span
     className={`
       ${club.status === "pending" && "text-primary"}
-      ${club.status === "approved" && "text-green"}
-      ${club.status === "rejected" && "text-red"}
+      ${club.status === "approved" && "text-green-500"}
+      ${club.status === "rejected" && "text-red-500"}
     `}
   >
     {club.status}
   </span>
 </td>
 <td>
-    <div className='flex justify-center items-center -ml-10'>
+    <div className='flex justify-center items-center'>
 
         {/* edit  */}
         <button title='Edit' className="tooltip tooltip-left [&_.tooltip-content]:text-red-400"
-  data-tip="Edit"
-><NavLink to={`/dashboard/manager/myclubs/${club._id}`} > <RiFileEditFill className={"text-primary"} size={30}/></NavLink>
+ 
+>{club.status === 'rejected' ? (
+  <span
+    className="tooltip tooltip-left cursor-not-allowed opacity-40"
+    data-tip="Editing disabled (Rejected)"
+  >
+    <RiFileEditFill size={30} className="text-gray-400" />
+  </span>
+) : (
+  <NavLink
+    to={`/dashboard/manager/myclubs/${club._id}`}
+    className="tooltip tooltip-left"
+    data-tip="Edit"
+  >
+    <RiFileEditFill size={30} className="text-primary" />
+  </NavLink>
+)}
+
 </button>
 
 

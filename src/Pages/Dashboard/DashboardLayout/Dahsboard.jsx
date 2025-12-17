@@ -151,14 +151,16 @@ const Dahsboard = () => {
 </li>
 
 <li>
-                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Registration Requests">
+                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Registered Clubs">
                   {/* Settings icon */}
-                  <NavLink to="/clubreq">
+                  <NavLink to="/dashboard/admin/registeredclubs">
                   <MdAppRegistration />
-                  <span className="is-drawer-close:hidden">Club Regestration</span>
+                  <span className="is-drawer-close:hidden">Registered Clubs</span>
                   </NavLink>
                 </button>
               </li>
+
+              
 
             
               </>

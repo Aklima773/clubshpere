@@ -15,6 +15,7 @@ import MyClubs from '../Pages/Dashboard/ManagerDashboard/MyClubs';
 import ManagerDashboard from '../Pages/Dashboard/ManagerDashboard/ManagerDashboard';
 import ManagerRoute from './ManagerRoute/ManagerRoute';
 import MyClubsUpdate from '../Pages/Dashboard/ManagerDashboard/MyClubsUpdate';
+import RegesteredClubs from '../Pages/Dashboard/AdminDashboard/RegesteredClubs';
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,10 @@ children:[
                 path: "users",
                 element: <AllUsers></AllUsers>
             },
+            {
+                path: "registeredClubs",
+                element: <RegesteredClubs></RegesteredClubs>
+            }
          
             
            
