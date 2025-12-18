@@ -4,15 +4,15 @@ import { useQuery } from '@tanstack/react-query';
 
 const useCategories = () => {
     const axiosSecure = useAxiosSecure();
-    const { isLoading: categoryLoading, data: categories = [] } = useQuery({
+    const { data } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/categories`);
             // console.log(res.data.cities)
-            return res.data || []
+            return res.data;
         }
     })
-    return { categories, categoryLoading };
+    return { categories: Array.isArray(data) ? data : [] }
 };
 
 export default useCategories;

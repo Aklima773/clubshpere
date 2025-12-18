@@ -4,15 +4,15 @@ import { useQuery } from '@tanstack/react-query';
 
 const useClubs = () => {
     const axiosSecure = useAxiosSecure();
-    const { isLoading: clubLoading, data: clubs = [] } = useQuery({
+    const { data } = useQuery({
         queryKey: ['clubs'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/clubs`);
             // console.log(res.data.cities)
-            return res.data || []
+            return res.data;
         }
     })
-    return { clubs, clubLoading };
+    return { clubs: Array.isArray(data) ? data : [] };
 };
 
 export default useClubs;

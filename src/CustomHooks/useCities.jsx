@@ -7,7 +7,7 @@ const useCities = () => {
 
     
     const axiosSecure = useAxiosSecure();
-    const { isLoading: citiesLoading, data: cities = [] } = useQuery({
+    const { data} = useQuery({
         queryKey: ['cities'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/cities`);
@@ -15,7 +15,7 @@ const useCities = () => {
             return res.data || []
         }
     })
-    return { cities, citiesLoading };
+    return { cities: Array.isArray(data) ? data : [] };
 };
 
 export default useCities;

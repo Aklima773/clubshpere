@@ -5,7 +5,8 @@ import useCategories from '../../CustomHooks/useCategories';
 import { NavLink } from 'react-router';
 
 const MarqueeSlider = () => {
-  const { categories = [] } = useCategories();
+  const { categories} = useCategories();
+  
 
  
 
