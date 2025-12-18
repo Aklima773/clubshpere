@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Container from '../../../Components/Container/Container';
 import useAuth from '../../../CustomHooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 const Login = () => {
    
@@ -29,9 +30,11 @@ const { signInUser } = useAuth();
           .then(result => {
               console.log(result.user)
               navigate(location?.state || '/')
+              toast.success('login successfully')
           })
           .catch(error => {
               console.log(error)
+              toast.error('login failed')
           })
   }
    
@@ -53,7 +56,7 @@ const { signInUser } = useAuth();
     <div className='flex justify-center items-center my-4'>
      
      <h3 className="text-2xl text-center ">Welcome back </h3>
-       <div className='ml-2'><span className='text-center text-2xl text-[#f111db]'>Club<spn className='text-[#487ce0]'>Sphere !</spn></span></div>
+       <div className='ml-2'><span className='text-center text-2xl text-[#f111db]'>Club<span className='text-[#487ce0]'>Sphere !</span></span></div>
      </div>
             <p className='text-center'>Please Login</p>
             <form className="card-body" onSubmit={handleSubmit(handleLogin)}>
@@ -76,7 +79,7 @@ const { signInUser } = useAuth();
                     <div><a className="link link-hover">Forgot password?</a></div>
                     <button className="btn btn-primary mt-4 hover:bg-base-200 border-0 hover:text-primary">Login</button>
                 </fieldset>
-                <p>New to <span className='text-center text-[16px] text-[#f111db]'>Club<spn className='text-[#487ce0]'>Sphere!</spn></span> <Link
+                <p>New to <span className='text-center text-[16px] text-[#f111db]'>Club<span className='text-[#487ce0]'>Sphere!</span></span> <Link
                     state={location.state}
                     className='text-blue-400 underline'
                     to="/register">Register </Link> here....</p>

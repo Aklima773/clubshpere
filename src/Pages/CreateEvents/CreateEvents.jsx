@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router';
 import useCities from '../../CustomHooks/useCities';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import useClubs from '../../CustomHooks/useClubs';
 
 const CreateEvents = () => {
 
-    
 // call useForm 
     const {
         register,
@@ -25,23 +25,31 @@ const CreateEvents = () => {
     const navigate = useNavigate();
 
 
-    // calling avaialable citie 
+      
+
+    //   select club 
+    const {clubs} = useClubs();
     const { cities} = useCities();
 
-    const selectedCity = useWatch({ control, name: "city" });
+    // watch 
 
-    const selectedCityData = cities.find(
-        (item) => item.city === selectedCity
-      );
-      
-      const areas = selectedCityData?.areas || [];
+    const selectedClubName = useWatch({control, name: "club" });
+
+    // const selectedCityName = useWatch({control, name: "city" })
+
+    // get selected club data 
+
+  const selectedClubData = clubs.find(c => c.clubName === selectedClubName);
+
+//   get selected cities name 
+const clubCity = selectedClubData?.location?.city ? [selectedClubData.location.city] : [];
 
 
-      //categories calling
+// get areas of that city 
+const selectedCityData = cities.find(c => c.city === clubCity);
+const areas = selectedCityData?.areas || [];
 
-     
-
-     
+    
       
 // handle cost 
 const membershipCost = useWatch({control, name:"membershipCost"});
@@ -103,16 +111,26 @@ const handleCreateClub = async (data) => {
 
     return (
         <div>
-        <h2 className="text-5xl font-bold text-primary">Create Club</h2>
+        <h2 className="text-5xl font-bold text-primary">Create Events</h2>
         <form onSubmit={handleSubmit(handleCreateClub)} className='mt-12 p-4 text-black'>
           
             {/* {Club info} */}
             <div className='grid grid-cols-1 md:grid-cols-2 gap-12 my-8'>
                 <fieldset className="fieldset">
-                    <label className="label">Club Name</label>
+                    <label className="label">Event Name</label>
                     <input type="text" {...register('clubName')} className="input w-full" placeholder="Club Name" />
+
+
+                    <label className="label mt-4">Club Name</label>
+                    <select {...register("club")} className="select select-bordered w-full">
+  <option value="">Select City</option>
+  {clubs.map((item) => (
+    <option key={item._id} value={item.clubName}>
+      {item.clubName}
+    </option>
+  ))}
+</select>
                 </fieldset>
-               
             </div>
 
             {/* two column */}
@@ -158,16 +176,10 @@ const handleCreateClub = async (data) => {
            {/* location  */}
                 <fieldset className="fieldset">
                     
+
                     
                     <label className="label">Location City</label>
-                    <select {...register("city")} className="select select-bordered w-full">
-  <option value="">Select City</option>
-  {cities.map((item) => (
-    <option key={item._id} value={item.city}>
-      {item.city}
-    </option>
-  ))}
-</select>
+                    <input type="text" value={selectedCityData} {...register('clubCity')} placeholder=""/>
 
           
                     <label className="label">Area Name</label>

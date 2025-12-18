@@ -43,8 +43,8 @@ const CreateClubs = () => {
       const { categories} = useCategories();
       
 
-      const selectedCategory = useWatch({control, name: 'category' })
-      const selectedCategoryData = categories.find((item)=> item.category === selectedCategory)
+      // const selectedCategory = useWatch({control, name: 'category' })
+      // const selectedCategoryData = categories.find((item)=> item.category === selectedCategory)
 
      
       

@@ -16,12 +16,13 @@ import ManagerDashboard from '../Pages/Dashboard/ManagerDashboard/ManagerDashboa
 import ManagerRoute from './ManagerRoute/ManagerRoute';
 import MyClubsUpdate from '../Pages/Dashboard/ManagerDashboard/MyClubsUpdate';
 import RegesteredClubs from '../Pages/Dashboard/AdminDashboard/RegesteredClubs';
-import CreateEvents from '../Pages/Dashboard/ManagerDashboard/CreateEvents';
+
 import CategoryClubs from '../Pages/CategoryClubs/CategoryClubs';
 import CreateCategory from '../Pages/Category/CreateCategory';
 import Categories from '../Pages/Categories/Categories';
-import ClubCard from '../Components/ClubCard/ClubCard';
+
 import ClubDetails from '../Components/ClubCard/ClubDetails';
+import CreateEvents from '../Pages/CreateEvents/CreateEvents';
 
 
 const router = createBrowserRouter([

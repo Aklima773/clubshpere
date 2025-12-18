@@ -94,7 +94,7 @@ const handleRegistration =(data)=>{
         <div className='flex justify-center items-center my-4'>
      
         <h3 className="text-2xl text-center ">Welcome to </h3>
-          <div className='ml-2'><span className='text-center text-2xl text-[#f111db]'>Club<spn className='text-[#487ce0]'>Sphere !</spn></span></div>
+          <div className='ml-2'><span className='text-center text-2xl text-[#f111db]'>Club<span className='text-[#487ce0]'>Sphere !</span></span></div>
         </div>
             
             <p className='text-center text-xl text-primary'>Please Register</p>
