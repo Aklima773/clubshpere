@@ -46,9 +46,9 @@ alt="group"
             Events are happening every day—sign up to join the fun.
             </p>
 
-            <div className="button">
-            <a className="btn bg-secondary hover:bg-primary transition-colors duration-200 font-bold text-[16px]
-            text-white rounded-3xl my-5 mb-16"><NavLink to={'/login'}>Join Event</NavLink></a>
+            <div className="button btn bg-secondary hover:bg-primary transition-colors duration-200 font-bold text-[16px]
+            text-white rounded-3xl my-5 mb-16">
+            <NavLink to={'/login'}>Join Event</NavLink>
             </div>
 
     </div>
@@ -104,8 +104,8 @@ alt="group"
             </p>
 
             <div className="button">
-            <a className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
-            text-primary rounded-3xl my-5 mb-16"><NavLink to={'/login'}>Join Event</NavLink></a>
+            <button className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
+            text-primary rounded-3xl my-5 mb-16"><NavLink to={'/login'}>Join Event</NavLink></button>
             </div>
 
     </div>
@@ -160,8 +160,8 @@ alt="group"
             </p>
 
             <div className="button">
-            <a className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
-            text-primary rounded-3xl my-5 mb-16"><NavLink to={'/login'}>Join Event</NavLink></a>
+            <button className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
+            text-primary rounded-3xl my-5 mb-16"><NavLink to={'/login'}>Join Event</NavLink></button>
             </div>
 
     </div>

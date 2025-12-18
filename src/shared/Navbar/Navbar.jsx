@@ -31,16 +31,20 @@ const Navbar = () => {
     })
   }
 
-  const link = <>
-  <li><a className='text-[18px]'><NavLink to ="/" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
-  }>Home</NavLink></a></li>
+  const link = 
+  <>
+  <li className='text-[18px]'><NavLink to ="/" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
+  }>Home</NavLink></li>
+  
 
   {
-    user &&  <><li><a className='text-[18px]'><NavLink to ="myprofile" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
-  }>My Profile</NavLink></a></li>
+    user &&  <>
+    <li className='text-[18px]'><NavLink to ="myprofile" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
+  }>My Profile</NavLink></li>
   
-  <li><a className='text-[18px]'><NavLink to ="/dashboard" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
-  }>Dashboard</NavLink></a></li></>
+  <li className='text-[18px]'><NavLink to ="/dashboard" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
+  }>Dashboard</NavLink></li>
+  </>
   }
  
   
@@ -61,7 +65,7 @@ const Navbar = () => {
        {link}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl w-[100px] p-8 hover:bg-amber-200 transition-colors duration-200"><Logo></Logo></a>
+    <NavLink to="/" className="btn btn-ghost text-xl w-[100px] p-8 hover:bg-amber-200 transition-colors duration-200"><Logo></Logo></NavLink>
   </div>
   
   <div className="navbar-center hidden lg:flex">
@@ -91,21 +95,21 @@ const Navbar = () => {
 
     {
       user? <div className='flex justify-center items-center gap-4'>
-        <a className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
-    text-primary rounded-3xl" onClick={handleSignout}>SignOut</a> 
+        <button className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
+    text-primary rounded-3xl" onClick={handleSignout}>SignOut</button> 
 
-      <a className='text-center text-sm text-primary'><NavLink to={"/myprofile"}> {user?.photoURL && (
+      <button className='text-center text-sm text-primary'><NavLink to={"/myprofile"}> {user?.photoURL && (
               <img
                 src={user.photoURL}
                 alt={user.displayName || "User"}
                 className={"w-15 h-15 rounded-full object-cover bg-primary border-2 border-neutral "}
                 title={user?.displayName || "User"}
               />
-            )}</NavLink>{user?.displayName || "User"}</a>
+            )}</NavLink>{user?.displayName || "User"}</button>
       </div>
     :
-    <a className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
-    text-primary rounded-3xl"><NavLink to={'/login'}>Login</NavLink></a>
+    <button className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
+    text-primary rounded-3xl"><NavLink to={'/login'}>Login</NavLink></button>
     }
     
   </div>

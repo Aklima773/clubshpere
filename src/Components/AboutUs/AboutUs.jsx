@@ -33,15 +33,16 @@ const AboutUs = () => {
                 <div className="content w-1/2">
                     <h1 className='text-3xl font-extrabold text-primary mb-8'>About Us</h1>
 
-                    <p className='content text-left text-primary'>
+                    <div>
+                        <p className='content text-left text-primary'>
                     People use Meetup to meet new people, learn new things, find support, get out of their comfort zones, and pursue their passions, together. Membership is free. People use Meetup to meet new people, learn new things, find support, get out of their comfort zones, and pursue their passions, together. Membership is free.
 
-
+                    </p>
                     <p className='mt-4'>
                     Membership is free. People use Meetup to meet new people, learn new things, find support, get out of their comfort zones, and pursue their passions, together. Membership is free.
 
                     </p>
-                    </p>
+                    </div>
                 </div>
             </div>
             </Container>

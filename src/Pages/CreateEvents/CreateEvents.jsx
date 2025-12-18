@@ -4,11 +4,10 @@ import useAuth from '../../CustomHooks/useAuth';
 import useAxiosSecure from '../../CustomHooks/useAxiosSecure';
 import { useNavigate } from 'react-router';
 import useCities from '../../CustomHooks/useCities';
-import useCategories from '../../CustomHooks/useCategories';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
-const CreateClubs = () => {
+const CreateEvents = () => {
 
     
 // call useForm 
@@ -40,11 +39,7 @@ const CreateClubs = () => {
 
       //categories calling
 
-      const { categories} = useCategories();
-      
-
-      const selectedCategory = useWatch({control, name: 'category' })
-      const selectedCategoryData = categories.find((item)=> item.category === selectedCategory)
+     
 
      
       
@@ -71,8 +66,6 @@ const handleCreateClub = async (data) => {
         const clubInfo = {
             clubName: data.clubName,
             description: data.clubDescription,
-            categoryId: data.categoryId,
-            categoryName: categories.find(c=>c._id === data.categoryId)?.categoryName,
             location: {
                 city: data.city,
                 area: data.area
@@ -119,26 +112,7 @@ const handleCreateClub = async (data) => {
                     <label className="label">Club Name</label>
                     <input type="text" {...register('clubName')} className="input w-full" placeholder="Club Name" />
                 </fieldset>
-                <fieldset className="fieldset">
-                        <legend className="fieldset-legend">Club Category</legend>
-                        <select
-  {...register('categoryId', { required: true })}
-  
-  className="select select-bordered w-full"
->
-  <option value="" disabled> 
-    Select a Category
-  </option>
-
-  {categories.map((category) => (
-    <option key={category._id} value={category._id}>
-     {category.categoryName}
-    </option>
-  ))}
-</select>
-
-                    </fieldset>
-
+               
             </div>
 
             {/* two column */}
@@ -248,4 +222,4 @@ const handleCreateClub = async (data) => {
     );
 };
 
-export default CreateClubs;
+export default CreateEvents;

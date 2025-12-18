@@ -60,23 +60,24 @@ const logOut = () => {
     return signOut(auth);
 }
 //observer set  TO GET user update mount unmount
-useEffect(() =>{
-    const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
-
-        console.log('current user', currentUser);
-
-        setUser(currentUser);
-        setLoading(false);
-          //as we got user so loading stop 
-
-    })
-
-    // unmount observer 
-
-    return () =>{
-        unsubscribe();
-    }
-})
+useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+  
+      if (currentUser) {
+        currentUser.getIdToken(true).then(token => {
+          localStorage.setItem('access-token', token);
+        });
+      } else {
+        localStorage.removeItem('access-token');
+      }
+  
+      setLoading(false);
+    });
+  
+    return () => unsubscribe();
+  }, []);
+  
 
 
     const authInfo ={

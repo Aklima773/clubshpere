@@ -16,6 +16,12 @@ import ManagerDashboard from '../Pages/Dashboard/ManagerDashboard/ManagerDashboa
 import ManagerRoute from './ManagerRoute/ManagerRoute';
 import MyClubsUpdate from '../Pages/Dashboard/ManagerDashboard/MyClubsUpdate';
 import RegesteredClubs from '../Pages/Dashboard/AdminDashboard/RegesteredClubs';
+import CreateEvents from '../Pages/Dashboard/ManagerDashboard/CreateEvents';
+import CategoryClubs from '../Pages/CategoryClubs/CategoryClubs';
+import CreateCategory from '../Pages/Category/CreateCategory';
+import Categories from '../Pages/Categories/Categories';
+import ClubCard from '../Components/ClubCard/ClubCard';
+import ClubDetails from '../Components/ClubCard/ClubDetails';
 
 
 const router = createBrowserRouter([
@@ -33,7 +39,14 @@ const router = createBrowserRouter([
                 path: '/myprofile',
                 element: <PrivateRoutes><MyProfile></MyProfile></PrivateRoutes>
             },
-            
+            {
+                path:'/categories/:id',
+                element: <CategoryClubs/>
+            },
+            {
+                path: '/club/:id',
+                element: <ClubDetails></ClubDetails>
+            }
 
            
         ]
@@ -66,9 +79,19 @@ children:[
                 element: <AllUsers></AllUsers>
             },
             {
-                path: "registeredClubs",
+                path: "registeredclubs",
                 element: <RegesteredClubs></RegesteredClubs>
-            }
+            },
+            {
+                path:'createcategory',
+                element:<CreateCategory></CreateCategory>
+            },
+            {
+                path: 'categories',
+                element:<Categories></Categories>
+            },
+            
+       
          
             
            
@@ -91,7 +114,12 @@ children:[
             {
                 path:"myclubs/:id",
                 element: <MyClubsUpdate></MyClubsUpdate>
-            }
+            },
+            {
+                path: "createevents",
+                element: <CreateEvents></CreateEvents>
+            },
+           
         ]
     }
   

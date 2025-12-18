@@ -6,7 +6,7 @@ const Logo = () => {
        <>
        <div className='flex flex-col justify-center items-center w-[45px]'>
        <img src={logo} className='w-[60px]' alt="" />
-       <span className='text-center text-sm text-[#f111db]'>Club<spn className='text-[#487ce0]'>Sphere</spn></span>
+       <span className='text-center text-sm text-[#f111db]'>Club<span className='text-[#487ce0]'>Sphere</span></span>
        </div>
      
        </>

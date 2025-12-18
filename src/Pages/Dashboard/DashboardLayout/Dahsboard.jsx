@@ -9,7 +9,7 @@ import useRole from '../../../CustomHooks/useRole';
 import { MdAppRegistration } from "react-icons/md";
 import { IoCreate } from "react-icons/io5";
 import { MdBusinessCenter } from "react-icons/md";
-
+import { MdCreateNewFolder } from "react-icons/md";
 
 
 const Dahsboard = () => {
@@ -160,6 +160,16 @@ const Dahsboard = () => {
                 </button>
               </li>
 
+              <li>
+                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Create Category">
+                  {/* Settings icon */}
+                  <NavLink to="/dashboard/admin/createcategory">
+                  <IoCreate />
+                  <span className="is-drawer-close:hidden">Create Category</span>
+                  </NavLink>
+                </button>
+              </li>
+
               
 
             
@@ -191,6 +201,18 @@ const Dahsboard = () => {
                   <NavLink to="/dashboard/manager/myclubs">
                   <MdBusinessCenter />
                   <span className="is-drawer-close:hidden">My Clubs</span>
+                  </NavLink>
+                </button>
+              </li>
+
+              {/* create events  */}
+
+              <li>
+                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="Create Events">
+                  {/* Settings icon */}
+                  <NavLink to="/dashboard/manager/createevents">
+                  <MdCreateNewFolder />
+                  <span className="is-drawer-close:hidden">Create Events</span>
                   </NavLink>
                 </button>
               </li>

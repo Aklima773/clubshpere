@@ -30,7 +30,7 @@ const JoinMeetup = () => {
 
 <div className='flex flex-col justify-center items-center'>
 <div className="title text-center mb-6 mt-6">
-                    <h1 className='text-3xl font-extrabold'>Join  <span className='text-center text-3xl text-[#f111db]'>Club<spn className='text-[#487ce0]'>Sphere</spn></span></h1>
+                    <h1 className='text-3xl font-extrabold'>Join  <span className='text-center text-3xl text-[#f111db]'>Club<span className='text-[#487ce0]'>Sphere</span></span></h1>
                 </div>
 
                 <div className="content-description max-w-[480px]">
@@ -40,8 +40,8 @@ const JoinMeetup = () => {
                 </div>
 
                 <div className="button">
-            <a className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
-            text-primary rounded-3xl my-5 mb-16"><NavLink to={'/register'}>SignUp For Free</NavLink></a>
+            <button className="btn bg-neutral hover:bg-amber-200 transition-colors duration-200 font-bold text-[16px]
+            text-primary rounded-3xl my-5 mb-16"><NavLink to={'/register'}>SignUp For Free</NavLink></button>
             </div>
 
 </div>
