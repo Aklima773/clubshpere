@@ -163,10 +163,6 @@ const handleCreateClub = async (data) => {
 
                     <label className="label">Status</label>
                     <input type="text" {...register('status')} defaultValue={'pending'} className="input w-full" placeholder="status" />
-            
-
-
-
                 </fieldset>
 
 
@@ -179,7 +175,14 @@ const handleCreateClub = async (data) => {
 
                     
                     <label className="label">Location City</label>
-                    <input type="text" value={selectedCityData} {...register('clubCity')} placeholder=""/>
+                    <select {...register("city")} className="select select-bordered w-full">
+              <option value="">Select City</option>
+              {clubCity.map((city, index) => (
+                <option key={index} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
 
           
                     <label className="label">Area Name</label>
