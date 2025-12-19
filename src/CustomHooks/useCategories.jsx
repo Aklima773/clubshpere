@@ -8,12 +8,12 @@ const useCategories = () => {
         queryKey: ['category'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/categories`);
-            console.log('API Response:', res.data); // Debug what API returns
+            console.log('API Response:', res.data); 
             return res.data;
         }
     });
 
-    // ✅ SAFEGUARD: Always return array + handle all edge cases
+   
     const categories = React.useMemo(() => {
         if (categoryLoading || error || !data) return [];
         return Array.isArray(data) ? data : [];

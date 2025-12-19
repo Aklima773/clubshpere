@@ -10,9 +10,9 @@ import AboutUs from '../../Components/AboutUs/AboutUs';
 import HowitWorks from '../../Components/HowitWorks/HowitWorks';
 import JoinMeetup from '../../Components/JoinMeetUp/JoinMeetup';
 import { ToastContainer } from 'react-toastify';
-import ClubCard from '../../Components/ClubCard/ClubCard';
-import UpcomingEvent from '../../Components/UpCommingEvents/UpcomingEvent';
+
 import UpcomingEvents from '../../Components/UpCommingEvents/UpcomingEvents';
+import Events from '../Events/Events';
 
 const Home = () => {
     return (
@@ -21,8 +21,9 @@ const Home = () => {
        <BannerSection></BannerSection>
        <MarqueeSlider></MarqueeSlider>
        <UpcomingEvents></UpcomingEvents>
+       <Events></Events>
        <AboutUs></AboutUs>
-       
+      
        <HowitWorks></HowitWorks>
        <JoinMeetup></JoinMeetup>
        

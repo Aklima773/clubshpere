@@ -24,6 +24,7 @@ import Categories from '../Pages/Categories/Categories';
 import ClubDetails from '../Components/ClubCard/ClubDetails';
 import CreateEvents from '../Pages/CreateEvents/CreateEvents';
 import MyEvents from '../Pages/Dashboard/ManagerDashboard/MyEvents';
+import Events from '../Pages/Events/Events';
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
             {
                 path: '/club/:id',
                 element: <ClubDetails></ClubDetails>
+            },
+            {
+                path: '/events',
+                element: <Events></Events>
             }
 
            
