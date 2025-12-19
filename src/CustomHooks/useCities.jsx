@@ -7,15 +7,24 @@ const useCities = () => {
 
     
     const axiosSecure = useAxiosSecure();
-    const { data} = useQuery({
+    const { data,error,isLoading: citiesLoading} = useQuery({
         queryKey: ['cities'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/cities`);
             // console.log(res.data.cities)
-            return res.data || []
+            return res.data;
         }
-    })
-    return { cities: Array.isArray(data) ? data : [] };
+    });
+
+
+    const cities = React.useMemo(() => {
+        if (citiesLoading || error || !data) return [];
+        return Array.isArray(data) ? data : [];
+    }, [data, citiesLoading, error]);
+
+    return { cities, citiesLoading, error };
+
+    
 };
 
 export default useCities;

@@ -5,10 +5,11 @@ import useCategories from '../../CustomHooks/useCategories';
 import { NavLink } from 'react-router';
 
 const MarqueeSlider = () => {
-  const { categories} = useCategories();
-  
+  const { categories, categoryLoading } = useCategories();
 
- 
+  console.log('Final categories:', categories); // Should always be array
+  
+  if (categoryLoading) return <Loading />;
 
   return (
     <>
@@ -20,6 +21,7 @@ const MarqueeSlider = () => {
 
       <div className="bg-cyan-50 p-6 mb-10">
         <Marquee speed={60} pauseOnHover gradient={false}>
+          
           {categories.map((category, index) => {
          
             

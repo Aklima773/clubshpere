@@ -23,6 +23,7 @@ import Categories from '../Pages/Categories/Categories';
 
 import ClubDetails from '../Components/ClubCard/ClubDetails';
 import CreateEvents from '../Pages/CreateEvents/CreateEvents';
+import MyEvents from '../Pages/Dashboard/ManagerDashboard/MyEvents';
 
 
 const router = createBrowserRouter([
@@ -120,6 +121,10 @@ children:[
                 path: "createevents",
                 element: <CreateEvents></CreateEvents>
             },
+            {
+                path: "myevents",
+                element: <MyEvents></MyEvents>
+            }
            
         ]
     }
