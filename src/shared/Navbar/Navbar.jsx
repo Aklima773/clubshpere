@@ -40,22 +40,60 @@ const Navbar = () => {
   <li className='text-[18px]'><NavLink to ="/clubs" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
   }>Clubs</NavLink></li>
   
-
   {
-    user &&  <>
-    <li className='text-[18px]'><NavLink to ="myprofile" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
-  }>My Profile</NavLink></li>
-  
-  <li className='text-[18px]'><NavLink to ="/dashboard" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
-  }>Dashboard</NavLink></li>
-  </>
-  }
+  user && (
+    <>
+    <li className="relative">
+      <div className="dropdown dropdown-hover">
+        {/* Profile trigger */}
+        <label
+          tabIndex={0}
+          className="cursor-pointer text-[12px] md:text-[18px] font-medium"
+        >
+          Profile
+        </label>
+
+        {/* Dropdown menu */}
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2 z-50"
+        >
+          <li className="text-[16px]">
+            <NavLink
+              to="/myprofile"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary"
+                  : ""
+              }
+            >
+              My Profile
+            </NavLink>
+          </li>
+
+          <li className="text-[16px]">
+            <NavLink to={`/memberevents/${user?.email}`}>
+              My Events
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+<li className='text-[18px]'><NavLink to ="/dashboard" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
+}>Dashboard</NavLink></li>
+</>
+  )
+}
+
+ 
+
  
   
   </>
     return (
      <>
-     <div className="navbar bg-base-100 shadow-sm">
+     <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50">
       <Container>
         <div className='flex justify-center items-center'>
   <div className="navbar-start">
@@ -78,7 +116,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <div className='search-box mr-4'>
+    {/* <div className='search-box mr-4'>
     <label className="input border border-neutral">
   <svg className="h-[1em] opacity-50 text-primary " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <g
@@ -94,7 +132,7 @@ const Navbar = () => {
   </svg>
   <input type="search" className='text-primary' required placeholder="Search" />
 </label>
-    </div>
+    </div> */}
 
 
     {

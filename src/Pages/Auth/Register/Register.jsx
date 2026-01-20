@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Container from '../../../Components/Container/Container';
 import { useLocation, useNavigate ,Link} from 'react-router';
@@ -6,10 +6,13 @@ import useAxiosSecure from '../../../CustomHooks/useAxiosSecure';
 import useAuth from '../../../CustomHooks/useAuth';
 import Logo from '../../../Components/logo/Logo';
 import axios from 'axios';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 
 const Register = () => {
    
+
+    const [showPassword, setShowPassword] = useState(false);
   //use useForm react hook form
 const {register,handleSubmit,formState: {errors}} =useForm();
 
@@ -24,6 +27,13 @@ const navigate = useNavigate();
 
 // axios calling
 const axiosSecure = useAxiosSecure(); 
+
+const handlShowPass = (e)=>{
+    e.preventDefault();
+    
+    setShowPassword(!showPassword);
+    
+    }
 
 
 const handleRegistration =(data)=>{
@@ -122,11 +132,17 @@ const handleRegistration =(data)=>{
 
                     {/* password */}
                     <label className="label">Password</label>
+
+                    <div className='flex justify-center items-center relative'>
+                        <div>
                     <input type="password" {...register('password', {
                         required: true,
                         minLength: 6,
                         pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/
-                    })} className="input input-bordered lg:w-[500px]" placeholder="Password" />
+                    })} className="input input-bordered lg:w-[500px] relative -ml-5" placeholder="Password" />
+
+
+                   
                     {
                         errors.password?.type === 'required' && <p className='text-red-500'>Password is required.</p>
                     }
@@ -138,7 +154,13 @@ const handleRegistration =(data)=>{
                     {
                         errors.password?.type === 'pattern' && <p className='text-red-500 text-center'>Password must have at least one uppercase, at least one lowercase, at least one number, and at least one special characters</p>
                     }
+                    </div>
 
+<div>
+<button onClick={handlShowPass} className='btn btn-xs absolute top-2 right-10'>{showPassword?<FaEye /> : <FaEyeSlash/> }</button>
+</div>
+
+</div>
                     <button className="btn btn-primary mt-4 hover:bg-base-200 border-0 hover:text-primary">Register</button>
                 </fieldset>
                 <p>Already have an account <Link
