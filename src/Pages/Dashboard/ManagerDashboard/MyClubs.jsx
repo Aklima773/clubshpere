@@ -26,7 +26,7 @@ const MyClubs = () => {
             
         }
     })
-
+    console.log('Rendering clubs:', clubs.length, clubs);
 
     // delete the club 
 

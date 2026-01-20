@@ -9,7 +9,7 @@ const MyProfile = () => {
     return (
     <>
     <Container>
-    <div className="card card-sm bg-base-200 max-w-100 mt-20 shadow mx-auto">
+    <div className="card card-sm bg-base-200 max-w-100 mt-20 shadow mx-auto mb-6">
   <figure className="hover-gallery h-70">
     <img src={user?.photoURL} />
 
@@ -22,7 +22,7 @@ const MyProfile = () => {
     </h2>
 
     <div className='flex justify-around items-center'>
-    <Link to={'/addfood'}><button className="btn bg-primary hover:bg-base-200 hover:text-primary text-white text-sm p-6">My Events</button></Link>
+    <Link to={'/memberevents/:email'}><button className="btn bg-primary hover:bg-base-200 hover:text-primary text-white text-sm p-6">My Events</button></Link>
     {/* <Link to={'/managefood'}><button className="btn bg-neutral text-white p-6">Donated Foods</button></Link>
     <Link to={'/myfoodrequest'}><button className="btn bg-neutral text-white p-6">Requested Foods</button></Link> */}
 

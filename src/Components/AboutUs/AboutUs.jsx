@@ -11,7 +11,7 @@ const AboutUs = () => {
             <div className='flex justify-center -gap-2 items- bg-amber-50 h-[400px] p-10 mb-10 rounded-3xl'>
 
 
-                <div className="img w-1/2 relative ml-10">
+                <div className="img w-1/2 relative ml-10 hidden sm:hidden md:block lg:block">
                    <Carousel
                     autoPlay={true}
                     infiniteLoop={true}
@@ -30,7 +30,7 @@ const AboutUs = () => {
                     </Carousel>
                 </div> 
 
-                <div className="content w-1/2">
+                <div className="content w-full md:w-1/2 lg:w-1/2">
                     <h1 className='text-3xl font-extrabold text-primary mb-8'>About Us</h1>
 
                     <div>

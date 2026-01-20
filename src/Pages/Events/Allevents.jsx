@@ -1,17 +1,12 @@
 import React from 'react';
 import useEvents from '../../CustomHooks/useEvents';
-import Loading from '../../Components/Loading/Loading';
 import Container from '../../Components/Container/Container';
+import Loading from '../../Components/Loading/Loading';
 import { NavLink } from 'react-router';
-import useAuth from '../../CustomHooks/useAuth';
 
-const Events = () => {
+const Allevents = () => {
 
-  // const {user} =useAuth();
-    const {events, eventsLoading} = useEvents();
-
-    const limitedevents = events.slice(0,6);
-   
+    const {events, eventsLoading} =useEvents();
 
     if(eventsLoading) return <Loading></Loading>
     return (
@@ -19,13 +14,13 @@ const Events = () => {
 
 <Container className='my-10'>
         <h1 className="text-3xl text-primary font-extrabold pb-5 mt-15">
-          UpComing Events
+          Avaialble Events
         </h1>
       
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-col-4 gap-6 mt-8"> 
             {
-                limitedevents.map((event)=>
+                events.map((event)=>
                 
                     <div key={event._id} className="card bg-base-100 w-96 shadow-sm">
                     <figure>
@@ -44,24 +39,14 @@ const Events = () => {
                         </div>
 
                         <div>
-                            <span className='text-[16px] text-neutral font-bold'>Event Date: {new Date(event.eventDate).toLocaleDateString('en-GB')}</span>
+                            <span className='text-[16px] text-neutral font-bold'>Event Date: {event.eventDate}</span>
                         </div>
                       </div>
                       <div className="card-actions flex justify-between items-center mt-6">
                         <div><p className='text-[18px] text-secondary'>Membership Cost: <span className='text-[14px] bg-gray-200 p-2 rounded-xl text-primary font-extrabold'>{event.membershipFee === 0 ? "Free" : event.membershipFee}</span></p></div>
-
-
-
-
-                        {/* button  */}
                         <div className="">
-
-                    
-                            <button className={`btn bg-primary text-white hover:bg-amber-200  hover:text-primary transition-colors duration-200 font-bold text-[16px]
-                              text-primary rounded-3xl  `}><NavLink to={`/events/${event._id}`}>View Event</NavLink>
-                              </button>
-                          
-              
+            <button className={`btn bg-primary text-white hover:bg-amber-200  hover:text-primary transition-colors duration-200 font-bold text-[16px]
+            text-primary rounded-3xl `}><NavLink to={`/events/${event._id}`}>View Event</NavLink></button>
             </div>
                         
                       </div>
@@ -72,11 +57,7 @@ const Events = () => {
             }
             </div>
 
-<div className='flex justify-center mt-10'>
-<button className={`btn bg-primary text-white hover:bg-amber-200  hover:text-primary transition-colors duration-200 font-bold text-[16px]
-            text-primary rounded-3xl`}><NavLink to={`/allevents`} className={"mx-auto"}>View All Event</NavLink></button>
-</div>
-            
+          
             </Container>
 
             
@@ -85,4 +66,4 @@ const Events = () => {
     );
 };
 
-export default Events;
+export default Allevents;

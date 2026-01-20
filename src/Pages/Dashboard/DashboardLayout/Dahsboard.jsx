@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router';
 import useAuth from '../../../CustomHooks/useAuth';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { FaUsersGear } from "react-icons/fa6";
 import Container from '../../../Components/Container/Container';
 import { ImProfile } from "react-icons/im";
@@ -10,6 +10,7 @@ import { MdAppRegistration } from "react-icons/md";
 import { IoCreate } from "react-icons/io5";
 import { MdBusinessCenter } from "react-icons/md";
 import { MdCreateNewFolder } from "react-icons/md";
+import AdminDashboard from '../AdminDashboard/AdminDashboard';
 
 
 const Dahsboard = () => {
@@ -98,6 +99,8 @@ const Dahsboard = () => {
 
           <div>
             <Container className='mt-10'>
+             
+              <ToastContainer></ToastContainer>
             <Outlet></Outlet>
             </Container>
           
@@ -213,6 +216,16 @@ const Dahsboard = () => {
                   <NavLink to="/dashboard/manager/createevents">
                   <MdCreateNewFolder />
                   <span className="is-drawer-close:hidden">Create Events</span>
+                  </NavLink>
+                </button>
+              </li>
+
+              <li>
+                <button className="bg-primary mt-4 text-white is-drawer-close:tooltip is-drawer-close:tooltip-right p-3" data-tip="My Events">
+                  {/* Settings icon */}
+                  <NavLink to="/dashboard/manager/myevents">
+                  <MdCreateNewFolder />
+                  <span className="is-drawer-close:hidden">My Events</span>
                   </NavLink>
                 </button>
               </li>

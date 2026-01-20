@@ -35,6 +35,10 @@ const Navbar = () => {
   <>
   <li className='text-[18px]'><NavLink to ="/" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
   }>Home</NavLink></li>
+  <li className='text-[18px]'><NavLink to ="/events" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
+  }>Events</NavLink></li>
+  <li className='text-[18px]'><NavLink to ="/clubs" className={({isActive})=> isActive ? "text-neutral underline underline-offset-6 decoration-3 decoration-secondary" : ""
+  }>Clubs</NavLink></li>
   
 
   {

@@ -17,7 +17,7 @@ const BannerSection = () => {
         <div className='1'>
         <div className='main-content relative rounded-bl-3xl rounded-br-3xl bg-[#77a1ee] p-8 '>
 
-<div className="right-img 
+<div className=" hidden sm:hidden md:block lg:block right-img 
 w-[190px] lg:w-[350px] 
 h-[190px] lg:h-[225]
 rounded-full p-3 
@@ -52,7 +52,7 @@ alt="group"
             </div>
 
     </div>
-    <div className="left-img 
+    <div className=" hidden sm:hidden md:block lg:block left-img 
 w-[190px] lg:w-[350px] 
 h-[190px] lg:h-[225]
 rounded-full p-3 
@@ -74,7 +74,7 @@ alt="group"
         <div className='2'>
         <div className='main-content relative rounded-bl-3xl rounded-br-3xl bg-amber-100 p-8 '>
 
-<div className="right-img 
+<div className=" hidden sm:hidden md:block lg:block  right-img 
 w-[190px] lg:w-[350px] 
 h-[190px] lg:h-[225]
 rounded-full p-3 
@@ -109,7 +109,7 @@ alt="group"
             </div>
 
     </div>
-    <div className="left-img 
+    <div className=" hidden sm:hidden md:block lg:block left-img 
 w-[190px] lg:w-[350px] 
 h-[190px] lg:h-[225]
 rounded-full p-3 
@@ -130,7 +130,7 @@ alt="group"
         <div className='3'>
         <div className='main-content relative rounded-bl-3xl rounded-br-3xl bg-[#ffc7f9] p-8 '>
 
-<div className="right-img 
+<div className=" hidden sm:hidden md:block lg:block right-img 
 w-[190px] lg:w-[350px] 
 h-[190px] lg:h-[225]
 rounded-full p-3 
@@ -165,7 +165,7 @@ alt="group"
             </div>
 
     </div>
-    <div className="left-img 
+    <div className=" hidden sm:hidden md:block lg:block left-img 
 w-[190px] lg:w-[350px] 
 h-[190px] lg:h-[225]
 rounded-full p-3 

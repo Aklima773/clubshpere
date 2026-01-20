@@ -15,9 +15,9 @@ const HowitWorks = () => {
                     <h1 className='text-3xl font-extrabold text-primary my-10 text-center'>How ClubSphere Works</h1>
                 </div>
 
-                <div className="steps-way-body flex justify-between items-center">
+                <div className="steps-way-body flex flex-col md:flex-row lg:flex-row justify-between items-center gap-3">
 
-                    <div className="steps-1 flex justify-start items-center gap-3 bg-base-200 w-[450px] p-6 rounded-3xl transition-all duration-300 ease-out
+                    <div className="steps-1 flex flex-col  md:flex-row lg:flex-row justify-start items-center gap-3 bg-base-200 w-[450px] p-6 rounded-3xl transition-all duration-300 ease-out
       hover:-translate-y-1
       hover:shadow-lg">
                         <div className='icon'>

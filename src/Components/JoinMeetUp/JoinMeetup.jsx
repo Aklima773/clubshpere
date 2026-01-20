@@ -24,7 +24,7 @@ const JoinMeetup = () => {
 
 
  
-      <div className="img1 max-w-[250px] absolute -top-5 left-1">
+      <div className="img1 max-w-[250px] absolute -top-5 left-1 hidden sm:hidden md:block lg:block">
                     <img src={joinmeet} alt="" />
                 </div>
 
@@ -45,7 +45,7 @@ const JoinMeetup = () => {
             </div>
 
 </div>
-            <div className="img1 max-w-[250px] absolute bottom-10 right-4">
+            <div className="img1 max-w-[250px] absolute bottom-10 right-4 hidden sm:hidden md:block lg:block">
                     <img src={join2} alt="" />
                 </div>
       </div>

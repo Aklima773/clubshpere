@@ -7,7 +7,7 @@ const Footer = () => {
         <>
         <div className='bg-base-200 rounded-tl-[60px] rounded-tr-[60px]'>
         <Container>
-        <footer className="footer sm:footer-horizontal  text-base-content p-10">
+        <footer className="footer sm:footer-horizontal sm:footer-center  text-base-content p-10">
   <aside>
     <div className='ml-4'>
     <Logo></Logo>

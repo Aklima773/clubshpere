@@ -25,6 +25,12 @@ import ClubDetails from '../Components/ClubCard/ClubDetails';
 import CreateEvents from '../Pages/CreateEvents/CreateEvents';
 import MyEvents from '../Pages/Dashboard/ManagerDashboard/MyEvents';
 import Events from '../Pages/Events/Events';
+import EventDetails from '../Pages/Events/EventDetails';
+import Allevents from '../Pages/Events/Allevents';
+import Clubs from '../Pages/Clubs/Clubs';
+import EventUpdate from '../Pages/Dashboard/ManagerDashboard/EventUpdate';
+import MemberEvents from '../Pages/Dashboard/MemberDashboard/MemberEvents';
+import CountingData from '../Pages/Dashboard/AdminDashboard/COUNTINGDATA.JSX';
 
 
 const router = createBrowserRouter([
@@ -47,12 +53,29 @@ const router = createBrowserRouter([
                 element: <CategoryClubs/>
             },
             {
-                path: '/club/:id',
+                path: '/clubs',
+                element: <Clubs></Clubs>
+
+            },
+            {
+                path: '/club/:clubId',
                 element: <ClubDetails></ClubDetails>
             },
             {
                 path: '/events',
                 element: <Events></Events>
+            },
+            {
+                path: '/events/:id',
+                element: <EventDetails></EventDetails>
+            },
+            {
+                path: '/allevents',
+                element: <Allevents></Allevents>
+            },
+            {
+                path: '/memberevents/:email',
+                element: <MemberEvents></MemberEvents>
             }
 
            
@@ -97,7 +120,7 @@ children:[
                 path: 'categories',
                 element:<Categories></Categories>
             },
-            
+           
        
          
             
@@ -129,6 +152,10 @@ children:[
             {
                 path: "myevents",
                 element: <MyEvents></MyEvents>
+            },
+            {
+                path: 'myevents/:id',
+                element: <EventUpdate></EventUpdate>
             }
            
         ]

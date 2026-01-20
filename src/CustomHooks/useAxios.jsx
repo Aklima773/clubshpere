@@ -4,9 +4,11 @@ import axios from 'axios';
 
 
 const axiosIntance = axios.create({
-    // baseUrl: 'https://clubspherebackend.vercel.app',
+    // baseURL:'https://clubspherebackend.vercel.app',
 
-    baseUrl:'http://localhost:3000'
+    baseURL: 'http://localhost:3000/'
+
+   
 });
 
 const useAxios = () => {
