@@ -6,7 +6,9 @@ import axios from 'axios';
 const axiosIntance = axios.create({
     // baseURL:'https://clubspherebackend.vercel.app',
 
-    baseURL: 'http://localhost:3000/'
+    baseURL:'http://localhost:3000'
+
+   
 
    
 });

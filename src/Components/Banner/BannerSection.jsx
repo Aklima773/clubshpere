@@ -12,7 +12,7 @@ const slides = [
     desc: 'text-amber-100',
     img1: group3,
     img2: group2,
-    img1Pos: 'top-12 left-12', // Fixed positions
+    img1Pos: 'top-12 left-12', 
     img2Pos: 'bottom-12 right-12',
   },
   {
@@ -101,7 +101,7 @@ const BannerSection = () => {
               >
                 <NavLink
                   to="/login"
-                  className="group btn bg-white/20 hover:bg-white/40 dark:bg-black/20 dark:hover:bg-black/40 backdrop-blur-md text-lg font-bold px-8 py-4 rounded-3xl shadow-xl transition-all duration-300 flex items-center gap-2"
+                  className="group btn bg-white/20 hover:bg-white/40 dark:bg-black/20 dark:hover:bg-black/40 backdrop-blur-md text-lg font-bold px-8 py-4 rounded-3xl shadow-xl transition-all duration-300 flex items-center gap-2 text-gray-600"
                 >
                   Join Event
                   <motion.span
@@ -150,7 +150,7 @@ const BannerSection = () => {
       </div>
 
       {/* Auto-advance */}
-      {setTimeout(nextSlide, 5000)}
+      {/* {setTimeout(nextSlide, 5000)} */}
     </Container>
   );
 };

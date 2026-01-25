@@ -13,6 +13,7 @@ import { ToastContainer } from 'react-toastify';
 
 import UpcomingEvents from '../../Components/UpCommingEvents/UpcomingEvents';
 import Events from '../Events/Events';
+import AvailableCities from '../../Components/AvailableCities/AvailableCities';
 
 const Home = () => {
     return (
@@ -23,6 +24,7 @@ const Home = () => {
        <UpcomingEvents></UpcomingEvents>
        <Events></Events>
        <AboutUs></AboutUs>
+       <AvailableCities></AvailableCities>
       
        <HowitWorks></HowitWorks>
        <JoinMeetup></JoinMeetup>
